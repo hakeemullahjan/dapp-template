@@ -6,6 +6,7 @@ import { AvailableContracts } from "../../hooks/useContract/types";
 import { useContract } from "../../hooks/useContract";
 import WalletButtons from "@components/WalletButtons";
 import { ConnectWallet } from "@thirdweb-dev/react";
+import Mint from "../Mint/index";
 
 import "./styles.scss";
 
@@ -31,8 +32,10 @@ const App: FC<Props> = () => {
   return (
     <div className="app_container">
       <WalletButtons wallets={[SupportedWallets.METAMASK]} />
-      <ConnectWallet />
+      {/* <ConnectWallet /> */}
       <button onClick={tryTransfer}>send</button>
+
+      <Mint />
     </div>
   );
 };
