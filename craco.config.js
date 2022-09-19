@@ -42,6 +42,17 @@ module.exports = {
             process: "process/browser.js",
           }),
         ],
+        module: {
+          rules: [
+            ...webpackConfig.module.rules,
+            {
+              test: /\.m?js/,
+              resolve: {
+                fullySpecified: false,
+              },
+            },
+          ],
+        },
       };
     },
   },
