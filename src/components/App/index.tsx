@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { Ember, Erc20, Kolnet } from "@contracts/types";
+// import { Ember, Erc20, Kolnet } from "@contracts/types";
 import { useWeb3React } from "@web3-react/core";
-import { AvailableContracts } from "../../hooks/useContract/types";
-import { useContract } from "../../hooks/useContract";
-import WalletButtons from "@components/WalletButtons";
-import { ConnectWallet } from "@thirdweb-dev/react";
-import Mint from "../Mint/index";
+// import { AvailableContracts } from "../../hooks/useContract/types";
+// import { useContract } from "../../hooks/useContract";
+// import WalletButtons from "@components/WalletButtons";
+import Mint from "@components/Mint";
+import ConnectWallet from "@components/ConnectWallet";
 
 import "./styles.scss";
 
@@ -29,11 +29,10 @@ const App: FC<Props> = () => {
   // };
 
   return (
-    <div className="app_container">
+    <div className="app_container r-c-sa">
       {/* <WalletButtons wallets={[SupportedWallets.METAMASK]} /> */}
-      {/* <ConnectWallet /> */}
       {/* <button onClick={tryTransfer}>send</button> */}
-
+      <ConnectWallet />
       <Mint />
     </div>
   );

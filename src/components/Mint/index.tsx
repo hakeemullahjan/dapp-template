@@ -1,19 +1,17 @@
-import { Web3Button } from "@thirdweb-dev/react";
 import { useRef, useState } from "react";
+import { Web3Button } from "@thirdweb-dev/react";
+import "./styles.scss";
+import { Typography } from "@mui/material";
 
-export default function Mint() {
-  const fileInputRef = useRef(null);
-  const [file, setFile] = useState();
+const Mint = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [file, setFile] = useState<File>();
 
   const uploadFile = () => {
     if (fileInputRef?.current) {
-      //@ts-ignore
       fileInputRef.current.click();
-      //@ts-ignore
       fileInputRef.current.onchange = () => {
-        //@ts-ignore
         if (fileInputRef?.current?.files?.length) {
-          //@ts-ignore
           const file = fileInputRef.current.files[0];
           setFile(file);
         }
@@ -22,12 +20,16 @@ export default function Mint() {
   };
 
   return (
-    <div>
+    <div className="c-c-c">
+      <Typography color="black" variant="h5" fontWeight="500">
+        Mint NFT Plugin
+      </Typography>
       {file ? (
         <img
           src={URL.createObjectURL(file)}
           onClick={() => setFile(undefined)}
           alt="df"
+          className="nft-image-preview"
         />
       ) : (
         <div
@@ -35,11 +37,19 @@ export default function Mint() {
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault();
-            //@ts-ignore
-            setFile(e.dataTransfer.files[0]);
+            const file = e.dataTransfer.files[0];
+            setFile(file);
           }}
+          className="drag-drop-box r-c-c"
         >
-          Drag and drop an image here to upload it!
+          <Typography
+            color="black"
+            variant="h5"
+            fontWeight="500"
+            textAlign="center"
+          >
+            Drag and drop an image here to upload it!
+          </Typography>
         </div>
       )}
       <input
@@ -49,25 +59,24 @@ export default function Mint() {
         ref={fileInputRef}
         style={{ display: "none" }}
       />
-
       <Web3Button
         // The contract address
         contractAddress="0x424037abd63d32595bD843791ab015C31c87Cb6d"
         // Access the contract itself, perform any action you want on it:
         action={async (contract) =>
-          contract.erc721.mint(
-            //@ts-ignore
-            {
-              name: "Hello world!",
-              // Image can be a File, or any url that points to a file.
-              image: file,
-              description: "Your awesome NFT",
-            }
-          )
+          file &&
+          contract.erc721.mint({
+            name: "Hello world!",
+            // Image can be a File, or any url that points to a file.
+            image: file,
+            description: "Your awesome NFT",
+          })
         }
       >
         Mint NFT
       </Web3Button>
     </div>
   );
-}
+};
+
+export default Mint;
