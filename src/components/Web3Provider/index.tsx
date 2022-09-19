@@ -17,7 +17,7 @@ const Web3Provider: FC<Props> = () => {
   );
 
   return (
-    <ThirdwebProvider desiredChainId={ChainId.Mainnet}>
+    <ThirdwebProvider desiredChainId={ChainId.Goerli}>
       <Web3ReactProvider connectors={connectors} key={"metamask"}>
         <App />
       </Web3ReactProvider>
