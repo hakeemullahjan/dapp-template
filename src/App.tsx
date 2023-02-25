@@ -1,13 +1,17 @@
-import { useAccount } from 'wagmi'
+import { Typography } from "@mui/material";
+import { useAccount } from "wagmi";
 
-import { Account, Connect, NetworkSwitcher } from './components'
+import { Account, Connect, NetworkSwitcher } from "./components";
 
 export function App() {
-  const { isConnected } = useAccount()
+  const { isConnected } = useAccount();
 
   return (
     <>
-      <h1>wagmi + Vite</h1>
+      <Typography variant="h4" gutterBottom>
+        Dapp boilerplate using Vite (React) + TS, Wagmi, Ethers.js, Redux
+        Toolkit & MUIv5.
+      </Typography>
 
       <Connect />
 
@@ -18,5 +22,5 @@ export function App() {
         </>
       )}
     </>
-  )
+  );
 }
